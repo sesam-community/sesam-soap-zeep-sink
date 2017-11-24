@@ -14,6 +14,11 @@ rootlogger=logger.Logger()
 app = Flask(__name__)
 
 requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += os.environ.get('cipher', ':ECDHE-RSA-AES128-SHA')
+
+enable_hostname_check = os.environ.get('enable_hostname_check',"true")
+if enable_hostname_check.lower() == "false":
+    requests.packages.urllib3.HTTPSConnectionPool(os.environ.get('hostname'), assert_hostname=False)
+
 timeout=int(os.environ.get('timeout', '30'))
 url=os.environ.get('url')
 
