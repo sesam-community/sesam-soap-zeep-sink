@@ -33,7 +33,7 @@ else:
 client = Client(url, transport=transport)
 ##Receiving soap-object
 @app.route('/<path:path>', methods=['POST'])
-def push():
+def push(path):
 
     if path is None:
         return Response("Missing path/method to WS", status=500, mimetype='text/plain')
